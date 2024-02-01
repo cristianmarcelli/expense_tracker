@@ -1,4 +1,5 @@
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
+import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 
 import '../models/expense.dart';
@@ -13,17 +14,25 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
+
+  void _openAddExpenseOverlay() {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => const NewExpense(),
+    );
+  }
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(useMaterial3: true),
+        // theme: ThemeData(useMaterial3: true),
         home: Scaffold(
           appBar: AppBar(
             title: const Text('Gestione spese'),
             actions: [
               IconButton(
-                onPressed: () {},
                 icon: const Icon(Icons.add),
+                onPressed: _openAddExpenseOverlay,
               ),
             ],
             // backgroundColor: Colors.amber,
@@ -76,29 +85,29 @@ class _ExpensesState extends State<Expenses> {
       date: DateTime.now(),
       category: Category.videogames,
     ),
-    Expense(
-      title: 'Zelda Totk',
-      amount: 59.99,
-      date: DateTime.now(),
-      category: Category.videogames,
-    ),
-    Expense(
-      title: 'Analisi del sangue',
-      amount: 6.00,
-      date: DateTime.now(),
-      category: Category.health,
-    ),
-    Expense(
-      title: 'Hellblade su steam',
-      amount: 2.48,
-      date: DateTime.now(),
-      category: Category.videogames,
-    ),
-    Expense(
-      title: 'Corso flutter',
-      amount: 12.99,
-      date: DateTime.now(),
-      category: Category.education,
-    ),
+    // Expense(
+    //   title: 'Zelda Totk',
+    //   amount: 59.99,
+    //   date: DateTime.now(),
+    //   category: Category.videogames,
+    // ),
+    // Expense(
+    //   title: 'Analisi del sangue',
+    //   amount: 6.00,
+    //   date: DateTime.now(),
+    //   category: Category.health,
+    // ),
+    // Expense(
+    //   title: 'Hellblade su steam',
+    //   amount: 2.48,
+    //   date: DateTime.now(),
+    //   category: Category.videogames,
+    // ),
+    // Expense(
+    //   title: 'Corso flutter',
+    //   amount: 12.99,
+    //   date: DateTime.now(),
+    //   category: Category.education,
+    // ),
   ];
 }
