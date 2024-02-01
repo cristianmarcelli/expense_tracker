@@ -1,17 +1,18 @@
+import 'package:expense_tracker/expenses_list.dart';
 import 'package:flutter/material.dart';
 
 import 'models/expense.dart';
 
-class Expanses extends StatefulWidget {
-  const Expanses({super.key});
+class Expenses extends StatefulWidget {
+  const Expenses({super.key});
 
   @override
-  State<Expanses> createState() {
-    return _ExpansesState();
+  State<Expenses> createState() {
+    return _ExpensesState();
   }
 }
 
-class _ExpansesState extends State<Expanses> {
+class _ExpensesState extends State<Expenses> {
   final List<Expense> _registeredExpense = [
     Expense(
         title: 'Hamburger',
@@ -19,7 +20,7 @@ class _ExpansesState extends State<Expanses> {
         date: DateTime.now(),
         category: Category.food),
     Expense(
-        title: 'Pizza',
+        title: 'Pizza with friends',
         amount: 11.00,
         date: DateTime.now(),
         category: Category.food),
@@ -33,17 +34,25 @@ class _ExpansesState extends State<Expanses> {
         amount: 399.00,
         date: DateTime.now(),
         category: Category.work),
+    Expense(
+        title: 'Netflix subscription',
+        amount: 5.99,
+        date: DateTime.now(),
+        category: Category.leisure),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MaterialApp(
+        home: Scaffold(
       body: Column(
-        children: const [
-          Text('The chart...'),
-          Text('Expenses list...'),
+        children: [
+          const Text('The chart'),
+          Expanded(
+            child: ExpensesList(expenses: _registeredExpense),
+          ),
         ],
       ),
-    );
+    ));
   }
 }
