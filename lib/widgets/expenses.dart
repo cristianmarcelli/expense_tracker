@@ -13,6 +13,32 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        theme: ThemeData(useMaterial3: true),
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text('Gestione spese'),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.add),
+              ),
+            ],
+            // backgroundColor: Colors.amber,
+          ),
+          body: Column(
+            children: [
+              const Text('The chart'),
+              Expanded(
+                child: ExpensesList(expenses: _registeredExpense),
+              ),
+            ],
+          ),
+        ));
+  }
+
   final List<Expense> _registeredExpense = [
     Expense(
       title: 'Assicurazione auto',
@@ -75,19 +101,4 @@ class _ExpensesState extends State<Expenses> {
       category: Category.education,
     ),
   ];
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-      body: Column(
-        children: [
-          const Text('The chart'),
-          Expanded(
-            child: ExpensesList(expenses: _registeredExpense),
-          ),
-        ],
-      ),
-    ));
-  }
 }
