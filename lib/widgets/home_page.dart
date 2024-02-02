@@ -1,11 +1,18 @@
+import 'dart:math';
+
 import 'package:expense_tracker/models/expense.dart';
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,9 +39,16 @@ class HomePage extends StatelessWidget {
 
   void _openAddExpenseOverlay(BuildContext context) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
-      builder: (ctx) => const NewExpense(),
+      builder: (ctx) => NewExpense(onAddExpense: _addExpense),
     );
+  }
+
+  void _addExpense(Expense expense) {
+    setState(() {
+      _registeredExpense.add(expense);
+    });
   }
 
   final List<Expense> _registeredExpense = [
@@ -69,13 +83,7 @@ class HomePage extends StatelessWidget {
       category: Category.leisure,
     ),
     Expense(
-      title: 'God of War PS5',
-      amount: 49.99,
-      date: DateTime.now(),
-      category: Category.videogames,
-    ),
-    Expense(
-      title: 'Zelda Totk',
+      title: 'Zelda totk',
       amount: 59.99,
       date: DateTime.now(),
       category: Category.videogames,
@@ -85,12 +93,6 @@ class HomePage extends StatelessWidget {
       amount: 6.00,
       date: DateTime.now(),
       category: Category.health,
-    ),
-    Expense(
-      title: 'Hellblade su steam',
-      amount: 2.48,
-      date: DateTime.now(),
-      category: Category.videogames,
     ),
     Expense(
       title: 'Corso flutter',
