@@ -19,8 +19,7 @@ class _NewExpenseState extends State<NewExpense> {
   final _amountController = TextEditingController();
 
   DateTime? _selectedDate;
-
-  Category? selectedCategory;
+  Category _selectedCategory = Category.leisure;
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +69,34 @@ class _NewExpenseState extends State<NewExpense> {
                 )
               ],
             ),
-            const SizedBox(
-              height: 30,
+            Row(
+              children: [
+                DropdownButton(
+                  value: _selectedCategory,
+                  items: Category.values
+                      .map(
+                        (category) => DropdownMenuItem(
+                          value: category,
+                          child: Text(
+                            // category.name.toString(),
+                            categoryName[category]?.data ?? '',
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    if (value == null) {
+                      return;
+                    }
+
+                    setState(() {
+                      _selectedCategory = value;
+                    });
+                  },
+                ),
+              ],
             ),
+            const SizedBox(height: 30),
             Row(
               children: [
                 ElevatedButton(

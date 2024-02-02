@@ -20,13 +20,14 @@ enum Category {
   coffee,
   breakfast,
   videogames,
-  movie,
+  cinema,
   gym,
   other,
 }
 
 const categoryIcons = {
   Category.food: Icons.lunch_dining,
+  Category.home: Icons.home,
   Category.travel: Icons.flight_takeoff,
   Category.leisure: Icons.local_play,
   Category.work: Icons.work,
@@ -38,9 +39,28 @@ const categoryIcons = {
   Category.coffee: Icons.coffee,
   Category.breakfast: Icons.free_breakfast,
   Category.videogames: Icons.videogame_asset,
-  Category.movie: Icons.movie,
+  Category.cinema: Icons.movie,
   Category.gym: Icons.fitness_center,
   Category.other: Icons.more,
+};
+
+const categoryName = {
+  Category.food: Text('Alimenti'),
+  Category.home: Text('Casa'),
+  Category.travel: Text('Viaggi'),
+  Category.leisure: Text('Sfizi'),
+  Category.work: Text('Lavoro'),
+  Category.car: Text('Auto'),
+  Category.health: Text('Salute'),
+  Category.education: Text('Istruzione'),
+  Category.publicTransport: Text('Trasporto'),
+  Category.taxes: Text('Tasse'),
+  Category.coffee: Text('Caffé'),
+  Category.breakfast: Text('Colazione'),
+  Category.videogames: Text('Videogiochi'),
+  Category.cinema: Text('Cinema'),
+  Category.gym: Text('Palestra'),
+  Category.other: Text('Altro'),
 };
 
 class Expense {
