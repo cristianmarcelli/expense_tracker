@@ -17,7 +17,8 @@ class _NewExpenseState extends State<NewExpense> {
 
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
-  final _categoryController = TextEditingController();
+
+  DateTime? _selectedDate;
 
   Category? selectedCategory;
 
@@ -54,7 +55,12 @@ class _NewExpenseState extends State<NewExpense> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text('Data'),
+                      // con il ! diciamo a DART che questo valore non sarà mai nullo
+                      Text(
+                        _selectedDate == null
+                            ? 'Data'
+                            : formatter.format(_selectedDate!),
+                      ),
                       IconButton(
                         onPressed: _presentDatePicker,
                         icon: const Icon(Icons.calendar_month),
@@ -88,22 +94,30 @@ class _NewExpenseState extends State<NewExpense> {
         ));
   }
 
-  void _presentDatePicker() {
+  void _presentDatePicker() async {
     final now = DateTime.now();
     final firstDate = DateTime(now.year - 1, now.month, now.day);
-    showDatePicker(
+
+    final pickedDate = await showDatePicker(
       context: context,
       initialDate: now,
       firstDate: firstDate,
       lastDate: now,
     );
+
+    // questa linea di codice verrà eseguita solo dopo che pickedDate sarà disponibile,
+    // in quanto stando in una funziona asincrona, con l'await facciamo sì che prima di continuare ad eseguire il codice,
+    // abbiamo tutti i dati necessari, inseriti dall'utente
+
+    setState(() {
+      _selectedDate = pickedDate;
+    });
   }
 
   @override
   void dispose() {
     _titleController.dispose();
     _amountController.dispose();
-    _categoryController.dispose();
     super.dispose();
   }
 }
