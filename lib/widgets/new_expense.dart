@@ -34,15 +34,35 @@ class _NewExpenseState extends State<NewExpense> {
                 label: Text('Descrizione'),
               ),
             ),
-            TextField(
-              controller: _amountController,
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
-              maxLength: 10,
-              decoration: const InputDecoration(
-                prefixText: '€',
-                labelText: 'Importo',
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _amountController,
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
+                    maxLength: 10,
+                    decoration: const InputDecoration(
+                      prefixText: '€',
+                      labelText: 'Importo',
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text('Data'),
+                      IconButton(
+                        onPressed: _presentDatePicker,
+                        icon: const Icon(Icons.calendar_month),
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
             const SizedBox(
               height: 30,
@@ -51,9 +71,9 @@ class _NewExpenseState extends State<NewExpense> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    _resetAmount();
+                    Navigator.pop(context);
                   },
-                  child: const Text('Annulla importo'),
+                  child: const Text('Chiudi'),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -68,10 +88,15 @@ class _NewExpenseState extends State<NewExpense> {
         ));
   }
 
-  void _resetAmount() {
-    setState(() {
-      _amountController.text = "";
-    });
+  void _presentDatePicker() {
+    final now = DateTime.now();
+    final firstDate = DateTime(now.year - 1, now.month, now.day);
+    showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: firstDate,
+      lastDate: now,
+    );
   }
 
   @override
