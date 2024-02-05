@@ -13,6 +13,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    Widget mainContent = const Center(
+      child: Text('Nessuna spesa registrata'),
+    );
+
+    if (_registeredExpenses.isNotEmpty) {
+      mainContent = ExpensesList(
+        expenses: _registeredExpenses,
+        onRemoveExpense: _removeExpense,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Gestione spese'),
@@ -26,12 +37,9 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          const Text('The chart'),
+          const Text('Grafico'),
           Expanded(
-            child: ExpensesList(
-              expenses: _registeredExpense,
-              onRemoveExpense: _removeExpense,
-            ),
+            child: mainContent,
           ),
         ],
       ),
@@ -48,17 +56,33 @@ class _HomePageState extends State<HomePage> {
 
   void _addExpense(Expense expense) {
     setState(() {
-      _registeredExpense.add(expense);
+      _registeredExpenses.add(expense);
     });
   }
 
   void _removeExpense(Expense expense) {
+    final expenseIndex = _registeredExpenses.indexOf(expense);
+
     setState(() {
-      _registeredExpense.remove(expense);
+      _registeredExpenses.remove(expense);
     });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 5),
+        content: const Text('Spesa eliminata con successo'),
+        action: SnackBarAction(
+          label: 'Ripristina spesa',
+          onPressed: () {
+            setState(() {
+              _registeredExpenses.insert(expenseIndex, expense);
+            });
+          },
+        ),
+      ),
+    );
   }
 
-  final List<Expense> _registeredExpense = [
+  final List<Expense> _registeredExpenses = [
     Expense(
       title: 'Assicurazione auto',
       amount: 599.00,
