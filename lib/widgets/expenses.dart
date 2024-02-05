@@ -11,7 +11,7 @@ class Expenses extends StatefulWidget {
 }
 
 var kColorScheme =
-    ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 0, 196, 39));
+    ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 110, 0, 194));
 
 class _ExpensesState extends State<Expenses> {
   @override
@@ -37,9 +37,9 @@ class _ExpensesState extends State<Expenses> {
         ),
         textTheme: ThemeData().textTheme.copyWith(
               titleLarge: TextStyle(
-                fontWeight: FontWeight.normal,
+                fontWeight: FontWeight.bold,
                 color: kColorScheme.onSecondaryContainer,
-                fontSize: 14,
+                fontSize: 16,
               ),
             ),
       ),
