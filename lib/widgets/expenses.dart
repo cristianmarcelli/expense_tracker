@@ -10,9 +10,21 @@ class Expenses extends StatefulWidget {
   }
 }
 
+var kColorScheme =
+    ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 230, 207, 0));
+
 class _ExpensesState extends State<Expenses> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: HomePage());
+    return MaterialApp(
+      theme: ThemeData().copyWith(
+        colorScheme: kColorScheme,
+        appBarTheme: const AppBarTheme().copyWith(
+          backgroundColor: kColorScheme.onPrimaryContainer,
+          foregroundColor: kColorScheme.primaryContainer,
+        ),
+      ),
+      home: const HomePage(),
+    );
   }
 }
