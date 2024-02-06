@@ -12,17 +12,109 @@ class ExpensesList extends StatelessWidget {
 
   final List<Expense> expenses;
   final void Function(Expense expense) onRemoveExpense;
+  //
+  // @override
+  // Widget build(BuildContext context) {
+  //   return ListView.builder(
+  //     itemCount: expenses.length,
+  //     itemBuilder: (ctx, index) => Dismissible(
+  //       key: ValueKey(expenses[index].id),
+  //       background: Container(
+  //         color: Theme.of(context).colorScheme.error.withOpacity(0.75),
+  //         margin: EdgeInsets.symmetric(
+  //           horizontal: Theme.of(context).cardTheme.margin!.horizontal,
+  //         ),
+  //       ),
+  //       onDismissed: (direction) {
+  //         onRemoveExpense(expenses[index]);
+  //       },
+  //       child: ExpensesItem(
+  //         expenses[index],
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return ListView.builder(
+  //     itemCount: expenses.length,
+  //     itemBuilder: (ctx, index) => Dismissible(
+  //       key: ValueKey(expenses[index].id),
+  //       background: Container(
+  //         color: Theme.of(context).colorScheme.error.withOpacity(0.75),
+  //         margin: EdgeInsets.symmetric(
+  //           horizontal: Theme.of(context).cardTheme.margin!.horizontal,
+  //         ),
+  //         child: const Align(
+  //           alignment: Alignment.centerLeft,
+  //           child: Padding(
+  //             padding: EdgeInsets.only(left: 16.0), // Imposta la distanza dalla sinistra
+  //             child: Text(
+  //               'Rimuovi',
+  //               style: TextStyle(
+  //                 color: Colors.white,
+  //                 fontSize: 16.0,
+  //                 fontWeight: FontWeight.bold,
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //       onDismissed: (direction) {
+  //         onRemoveExpense(expenses[index]);
+  //       },
+  //       child: ExpensesItem(
+  //         expenses[index],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: expenses.length,
       itemBuilder: (ctx, index) => Dismissible(
-        key: ValueKey(key),
+        key: ValueKey(expenses[index].id),
         background: Container(
           color: Theme.of(context).colorScheme.error.withOpacity(0.75),
           margin: EdgeInsets.symmetric(
             horizontal: Theme.of(context).cardTheme.margin!.horizontal,
+          ),
+          child: const Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.only(left: 26.0),
+              child: Text(
+                'Rimuovi',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ),
+        secondaryBackground: Container(
+          color: Theme.of(context).colorScheme.error.withOpacity(0.75),
+          margin: EdgeInsets.symmetric(
+            horizontal: Theme.of(context).cardTheme.margin!.horizontal,
+          ),
+          child: const Align(
+            alignment: Alignment.centerRight,
+            child: Padding(
+              padding: EdgeInsets.only(right: 26.0),
+              child: Text(
+                'Rimuovi',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ),
         ),
         onDismissed: (direction) {
@@ -34,4 +126,6 @@ class ExpensesList extends StatelessWidget {
       ),
     );
   }
+
+
 }
