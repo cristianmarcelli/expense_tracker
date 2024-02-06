@@ -11,12 +11,39 @@ class Expenses extends StatefulWidget {
 }
 
 var kColorScheme =
-    ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 110, 0, 194));
+    ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 0, 105, 148));
+
+var kDarkColorScheme =
+    ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: const Color.fromARGB(
+        255, 0, 105, 148));
 
 class _ExpensesState extends State<Expenses> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      darkTheme: ThemeData.dark().copyWith(
+        colorScheme: kDarkColorScheme,
+        cardTheme: const CardTheme().copyWith(
+          color: kDarkColorScheme.secondaryContainer,
+          margin: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 8,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: kDarkColorScheme.primaryContainer,
+            foregroundColor: kDarkColorScheme.onPrimaryContainer,
+          ),
+        ),
+        textTheme: ThemeData().textTheme.copyWith(
+          titleLarge: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            fontSize: 16,
+          ),
+        ),
+      ),
       theme: ThemeData().copyWith(
         colorScheme: kColorScheme,
         appBarTheme: const AppBarTheme().copyWith(
@@ -43,6 +70,7 @@ class _ExpensesState extends State<Expenses> {
               ),
             ),
       ),
+      // themeMode: ThemeMode.system, // è di default
       home: const HomePage(),
     );
   }
