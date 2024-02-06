@@ -11,9 +11,21 @@ class Chart extends StatelessWidget {
   List<ExpenseBucket> get buckets {
     return [
       ExpenseBucket.forCategory(expenses, Category.food),
-      ExpenseBucket.forCategory(expenses, Category.leisure),
+      ExpenseBucket.forCategory(expenses, Category.home),
       ExpenseBucket.forCategory(expenses, Category.travel),
+      ExpenseBucket.forCategory(expenses, Category.leisure),
       ExpenseBucket.forCategory(expenses, Category.work),
+      ExpenseBucket.forCategory(expenses, Category.car),
+      ExpenseBucket.forCategory(expenses, Category.health),
+      ExpenseBucket.forCategory(expenses, Category.education),
+      ExpenseBucket.forCategory(expenses, Category.publicTransport),
+      ExpenseBucket.forCategory(expenses, Category.taxes),
+      ExpenseBucket.forCategory(expenses, Category.coffee),
+      ExpenseBucket.forCategory(expenses, Category.breakfast),
+      ExpenseBucket.forCategory(expenses, Category.videogames),
+      ExpenseBucket.forCategory(expenses, Category.cinema),
+      ExpenseBucket.forCategory(expenses, Category.gym),
+      ExpenseBucket.forCategory(expenses, Category.other),
     ];
   }
 
@@ -28,6 +40,70 @@ class Chart extends StatelessWidget {
 
     return maxTotalExpense;
   }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   final isDarkMode =
+  //       MediaQuery.of(context).platformBrightness == Brightness.dark;
+  //   return Container(
+  //     margin: const EdgeInsets.all(16),
+  //     padding: const EdgeInsets.symmetric(
+  //       vertical: 16,
+  //       horizontal: 8,
+  //     ),
+  //     width: double.infinity,
+  //     height: 180,
+  //     decoration: BoxDecoration(
+  //       borderRadius: BorderRadius.circular(8),
+  //       gradient: LinearGradient(
+  //         colors: [
+  //           Theme.of(context).colorScheme.primary.withOpacity(0.3),
+  //           Theme.of(context).colorScheme.primary.withOpacity(0.0)
+  //         ],
+  //         begin: Alignment.bottomCenter,
+  //         end: Alignment.topCenter,
+  //       ),
+  //     ),
+  //     child: Column(
+  //       children: [
+  //         Expanded(
+  //           child: Row(
+  //             crossAxisAlignment: CrossAxisAlignment.end,
+  //             children: [
+  //               for (final bucket in buckets) // alternative to map()
+  //                 ChartBar(
+  //                   fill: bucket.totalExpenses == 0
+  //                       ? 0
+  //                       : bucket.totalExpenses / maxTotalExpense,
+  //                 )
+  //             ],
+  //           ),
+  //         ),
+  //         const SizedBox(height: 12),
+  //         Row(
+  //           children: buckets
+  //               .map(
+  //                 (bucket) => Expanded(
+  //               child: Padding(
+  //                 padding: const EdgeInsets.symmetric(horizontal: 4),
+  //                 child: Icon(
+  //                   categoryIcons[bucket.category],
+  //                   color: isDarkMode
+  //                       ? Theme.of(context).colorScheme.secondary
+  //                       : Theme.of(context)
+  //                       .colorScheme
+  //                       .primary
+  //                       .withOpacity(0.7),
+  //                 ),
+  //               ),
+  //             ),
+  //           )
+  //               .toList(),
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -46,50 +122,56 @@ class Chart extends StatelessWidget {
         gradient: LinearGradient(
           colors: [
             Theme.of(context).colorScheme.primary.withOpacity(0.3),
-            Theme.of(context).colorScheme.primary.withOpacity(0.0)
+            Theme.of(context).colorScheme.primary.withOpacity(0.0),
           ],
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
         ),
       ),
-      child: Column(
-        children: [
-          Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                for (final bucket in buckets) // alternative to map()
-                  ChartBar(
-                    fill: bucket.totalExpenses == 0
-                        ? 0
-                        : bucket.totalExpenses / maxTotalExpense,
-                  )
-              ],
-            ),
-          ),
-          const SizedBox(height: 12),
-          Row(
-            children: buckets
-                .map(
-                  (bucket) => Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: Icon(
-                    categoryIcons[bucket.category],
-                    color: isDarkMode
-                        ? Theme.of(context).colorScheme.secondary
-                        : Theme.of(context)
-                        .colorScheme
-                        .primary
-                        .withOpacity(0.7),
-                  ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            for (final bucket in buckets)
+              Container(
+                width: 40,
+                margin: const EdgeInsets.symmetric(horizontal: 3),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          ChartBar(
+                            fill: bucket.totalExpenses == 0
+                                ? 0
+                                : bucket.totalExpenses / maxTotalExpense,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: Icon(
+                          categoryIcons[bucket.category],
+                          color: isDarkMode
+                              ? Theme.of(context).colorScheme.secondary
+                              : Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.7),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            )
-                .toList(),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
+
+
 }

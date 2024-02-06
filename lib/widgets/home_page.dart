@@ -1,4 +1,5 @@
 import 'package:expense_tracker/models/expense.dart';
+import 'package:expense_tracker/widgets/chart/chart.dart';
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          const Text('Grafico'),
+          Chart(expenses: _registeredExpenses),
           Expanded(
             child: mainContent,
           ),
@@ -108,29 +109,29 @@ class _HomePageState extends State<HomePage> {
       date: DateTime.now(),
       category: Category.work,
     ),
-    // Expense(
-    //   title: 'Abbonamento Netflix',
-    //   amount: 5.99,
-    //   date: DateTime.now(),
-    //   category: Category.leisure,
-    // ),
-    // Expense(
-    //   title: 'Zelda totk',
-    //   amount: 59.99,
-    //   date: DateTime.now(),
-    //   category: Category.videogames,
-    // ),
-    // Expense(
-    //   title: 'Analisi del sangue',
-    //   amount: 6.00,
-    //   date: DateTime.now(),
-    //   category: Category.health,
-    // ),
-    // Expense(
-    //   title: 'Corso flutter',
-    //   amount: 12.99,
-    //   date: DateTime.now(),
-    //   category: Category.education,
-    // ),
+    Expense(
+      title: 'Abbonamento Netflix',
+      amount: 5.99,
+      date: DateTime.now(),
+      category: Category.leisure,
+    ),
+    Expense(
+      title: 'Zelda totk',
+      amount: 59.99,
+      date: DateTime.now(),
+      category: Category.videogames,
+    ),
+    Expense(
+      title: 'Analisi del sangue',
+      amount: 6.00,
+      date: DateTime.now(),
+      category: Category.health,
+    ),
+    Expense(
+      title: 'Corso flutter',
+      amount: 12.99,
+      date: DateTime.now(),
+      category: Category.education,
+    ),
   ];
 }
