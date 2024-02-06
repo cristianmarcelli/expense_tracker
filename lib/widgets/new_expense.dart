@@ -83,8 +83,15 @@ class _NewExpenseState extends State<NewExpense> {
                       (category) => DropdownMenuItem(
                         value: category,
                         child: Text(
-                          // category.name.toString(),
                           categoryName[category]?.data ?? '',
+                          style: TextStyle(
+                            color: Theme.of(context).brightness ==
+                                    Brightness.light
+                                ? Colors
+                                    .black
+                                : Colors
+                                    .white,
+                          ),
                         ),
                       ),
                     )
