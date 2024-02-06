@@ -15,12 +15,25 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     Widget mainContent = Center(
-      child: Text('Nessuna spesa registrata',style: TextStyle(
-        color: Theme.of(context).brightness == Brightness.light
-            ? Colors.black
-            : Colors.white,
-      ),),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Nessuna spesa registrata',
+            style: TextStyle(
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.black
+                  : Colors.white,
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () => _openAddExpenseOverlay(context),
+          ),
+        ],
+      ),
     );
+
 
     if (_registeredExpenses.isNotEmpty) {
       mainContent = ExpensesList(
