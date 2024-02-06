@@ -35,6 +35,11 @@ class _NewExpenseState extends State<NewExpense> {
             decoration: const InputDecoration(
               label: Text('Descrizione'),
             ),
+            style: TextStyle(
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.black
+                  : Colors.white,
+            ),
           ),
           Row(
             children: [
@@ -47,6 +52,11 @@ class _NewExpenseState extends State<NewExpense> {
                   decoration: const InputDecoration(
                     prefixText: '€',
                     labelText: 'Importo',
+                  ),
+                  style: TextStyle(
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? Colors.black
+                        : Colors.white,
                   ),
                 ),
               ),
@@ -61,6 +71,11 @@ class _NewExpenseState extends State<NewExpense> {
                       _selectedDate == null
                           ? 'Data'
                           : formatter.format(_selectedDate!),
+                      style: TextStyle(
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? Colors.black
+                            : Colors.white,
+                      ),
                     ),
                     IconButton(
                       onPressed: _presentDatePicker,
@@ -85,12 +100,10 @@ class _NewExpenseState extends State<NewExpense> {
                         child: Text(
                           categoryName[category]?.data ?? '',
                           style: TextStyle(
-                            color: Theme.of(context).brightness ==
-                                    Brightness.light
-                                ? Colors
-                                    .black
-                                : Colors
-                                    .white,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.black
+                                    : Colors.white,
                           ),
                         ),
                       ),
