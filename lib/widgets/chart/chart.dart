@@ -134,7 +134,7 @@ class Chart extends StatelessWidget {
           children: [
             for (final bucket in buckets)
               Container(
-                width: 40,
+                width: 50,
                 margin: const EdgeInsets.symmetric(horizontal: 3),
                 child: Column(
                   children: [
