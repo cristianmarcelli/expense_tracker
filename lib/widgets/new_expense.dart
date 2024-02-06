@@ -126,7 +126,9 @@ class _NewExpenseState extends State<NewExpense> {
                 },
                 child: const Text('Chiudi'),
               ),
-              const SizedBox(width: 5,),
+              const SizedBox(
+                width: 5,
+              ),
               ElevatedButton(
                 onPressed: _submitExpenseDate,
                 child: const Text('Salva'),
@@ -169,9 +171,22 @@ class _NewExpenseState extends State<NewExpense> {
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: const Text('Dati non validi'),
-          content: const Text(
-              'Verifica l\'inserimento corretto di descrizione, importo, data e categoria prima di continuare.'),
+          title: Text(
+            'Dati non validi',
+            style: TextStyle(
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.black
+                  : Colors.white,
+            ),
+          ),
+          content: Text(
+            'Verifica l\'inserimento corretto di descrizione, importo, data e categoria prima di continuare.',
+            style: TextStyle(
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.black
+                  : Colors.white,
+            ),
+          ),
           actions: [
             TextButton(
               onPressed: () {
