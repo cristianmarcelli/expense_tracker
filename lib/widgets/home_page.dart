@@ -14,8 +14,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    Widget mainContent = const Center(
-      child: Text('Nessuna spesa registrata'),
+    Widget mainContent = Center(
+      child: Text('Nessuna spesa registrata',style: TextStyle(
+        color: Theme.of(context).brightness == Brightness.light
+            ? Colors.black
+            : Colors.white,
+      ),),
     );
 
     if (_registeredExpenses.isNotEmpty) {

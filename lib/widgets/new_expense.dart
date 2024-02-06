@@ -126,6 +126,7 @@ class _NewExpenseState extends State<NewExpense> {
                 },
                 child: const Text('Chiudi'),
               ),
+              const SizedBox(width: 5,),
               ElevatedButton(
                 onPressed: _submitExpenseDate,
                 child: const Text('Salva'),
