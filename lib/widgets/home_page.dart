@@ -89,53 +89,53 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<Expense> _registeredExpenses = [
-    Expense(
-      title: 'Assicurazione auto',
-      amount: 599.00,
-      date: DateTime.now(),
-      category: Category.car,
-    ),
-    Expense(
-      title: 'Pizza con amici',
-      amount: 11.00,
-      date: DateTime.now(),
-      category: Category.food,
-    ),
-    Expense(
-      title: 'Treno per Bologna',
-      amount: 34.50,
-      date: DateTime.now(),
-      category: Category.travel,
-    ),
-    Expense(
-      title: 'Laptop nuovo',
-      amount: 399.00,
-      date: DateTime.now(),
-      category: Category.work,
-    ),
-    Expense(
-      title: 'Abbonamento Netflix',
-      amount: 5.99,
-      date: DateTime.now(),
-      category: Category.leisure,
-    ),
-    Expense(
-      title: 'Zelda totk',
-      amount: 59.99,
-      date: DateTime.now(),
-      category: Category.videogames,
-    ),
-    Expense(
-      title: 'Analisi del sangue',
-      amount: 6.00,
-      date: DateTime.now(),
-      category: Category.health,
-    ),
-    Expense(
-      title: 'Corso flutter',
-      amount: 12.99,
-      date: DateTime.now(),
-      category: Category.education,
-    ),
+  //   Expense(
+  //     title: 'Assicurazione auto',
+  //     amount: 599.00,
+  //     date: DateTime.now(),
+  //     category: Category.car,
+  //   ),
+  //   Expense(
+  //     title: 'Pizza con amici',
+  //     amount: 11.00,
+  //     date: DateTime.now(),
+  //     category: Category.food,
+  //   ),
+  //   Expense(
+  //     title: 'Treno per Bologna',
+  //     amount: 34.50,
+  //     date: DateTime.now(),
+  //     category: Category.travel,
+  //   ),
+  //   Expense(
+  //     title: 'Laptop nuovo',
+  //     amount: 399.00,
+  //     date: DateTime.now(),
+  //     category: Category.work,
+  //   ),
+  //   Expense(
+  //     title: 'Abbonamento Netflix',
+  //     amount: 5.99,
+  //     date: DateTime.now(),
+  //     category: Category.leisure,
+  //   ),
+  //   Expense(
+  //     title: 'Zelda totk',
+  //     amount: 59.99,
+  //     date: DateTime.now(),
+  //     category: Category.videogames,
+  //   ),
+  //   Expense(
+  //     title: 'Analisi del sangue',
+  //     amount: 6.00,
+  //     date: DateTime.now(),
+  //     category: Category.health,
+  //   ),
+  //   Expense(
+  //     title: 'Corso flutter',
+  //     amount: 12.99,
+  //     date: DateTime.now(),
+  //     category: Category.education,
+  //   ),
   ];
 }

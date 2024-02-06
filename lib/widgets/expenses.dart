@@ -11,7 +11,7 @@ class Expenses extends StatefulWidget {
 }
 
 var kColorScheme =
-    ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 0, 105, 148));
+    ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 0, 46, 79));
 
 var kDarkColorScheme =
     ColorScheme.fromSeed(brightness: Brightness.dark, seedColor: const Color.fromARGB(
