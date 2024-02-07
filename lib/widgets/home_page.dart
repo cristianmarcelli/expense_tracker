@@ -14,6 +14,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     Widget mainContent = Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -34,7 +37,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-
     if (_registeredExpenses.isNotEmpty) {
       mainContent = ExpensesList(
         expenses: _registeredExpenses,
@@ -53,14 +55,25 @@ class _HomePageState extends State<HomePage> {
         ],
         // backgroundColor: Colors.amber,
       ),
-      body: Column(
-        children: [
-          Chart(expenses: _registeredExpenses),
-          Expanded(
-            child: mainContent,
-          ),
-        ],
-      ),
+      body: width < 600
+          ? Column(
+              children: [
+                Chart(expenses: _registeredExpenses),
+                Expanded(
+                  child: mainContent,
+                ),
+              ],
+            )
+          : Row(
+              children: [
+                Expanded(
+                  child: Chart(expenses: _registeredExpenses),
+                ),
+                Expanded(
+                  child: mainContent,
+                ),
+              ],
+            ),
     );
   }
 
@@ -102,53 +115,53 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<Expense> _registeredExpenses = [
-  //   Expense(
-  //     title: 'Assicurazione auto',
-  //     amount: 599.00,
-  //     date: DateTime.now(),
-  //     category: Category.car,
-  //   ),
-  //   Expense(
-  //     title: 'Pizza con amici',
-  //     amount: 11.00,
-  //     date: DateTime.now(),
-  //     category: Category.food,
-  //   ),
-  //   Expense(
-  //     title: 'Treno per Bologna',
-  //     amount: 34.50,
-  //     date: DateTime.now(),
-  //     category: Category.travel,
-  //   ),
-  //   Expense(
-  //     title: 'Laptop nuovo',
-  //     amount: 399.00,
-  //     date: DateTime.now(),
-  //     category: Category.work,
-  //   ),
-  //   Expense(
-  //     title: 'Abbonamento Netflix',
-  //     amount: 5.99,
-  //     date: DateTime.now(),
-  //     category: Category.leisure,
-  //   ),
-  //   Expense(
-  //     title: 'Zelda totk',
-  //     amount: 59.99,
-  //     date: DateTime.now(),
-  //     category: Category.videogames,
-  //   ),
-  //   Expense(
-  //     title: 'Analisi del sangue',
-  //     amount: 6.00,
-  //     date: DateTime.now(),
-  //     category: Category.health,
-  //   ),
-  //   Expense(
-  //     title: 'Corso flutter',
-  //     amount: 12.99,
-  //     date: DateTime.now(),
-  //     category: Category.education,
-  //   ),
+      Expense(
+        title: 'Assicurazione auto',
+        amount: 599.00,
+        date: DateTime.now(),
+        category: Category.car,
+      ),
+      Expense(
+        title: 'Pizza con amici',
+        amount: 11.00,
+        date: DateTime.now(),
+        category: Category.food,
+      ),
+      Expense(
+        title: 'Treno per Bologna',
+        amount: 34.50,
+        date: DateTime.now(),
+        category: Category.travel,
+      ),
+      Expense(
+        title: 'Laptop nuovo',
+        amount: 399.00,
+        date: DateTime.now(),
+        category: Category.work,
+      ),
+      Expense(
+        title: 'Abbonamento Netflix',
+        amount: 5.99,
+        date: DateTime.now(),
+        category: Category.leisure,
+      ),
+      Expense(
+        title: 'Zelda totk',
+        amount: 59.99,
+        date: DateTime.now(),
+        category: Category.videogames,
+      ),
+      Expense(
+        title: 'Analisi del sangue',
+        amount: 6.00,
+        date: DateTime.now(),
+        category: Category.health,
+      ),
+      Expense(
+        title: 'Corso flutter',
+        amount: 12.99,
+        date: DateTime.now(),
+        category: Category.education,
+      ),
   ];
 }
