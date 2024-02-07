@@ -25,119 +25,178 @@ class _NewExpenseState extends State<NewExpense> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
-      child: Column(
-        children: [
-          TextField(
-            controller: _titleController,
-            maxLength: 50,
-            decoration: const InputDecoration(
-              label: Text('Descrizione'),
-            ),
-            style: TextStyle(
-              color: Theme.of(context).brightness == Brightness.light
-                  ? Colors.black
-                  : Colors.white,
-            ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _amountController,
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  maxLength: 10,
-                  decoration: const InputDecoration(
-                    prefixText: '€',
-                    labelText: 'Importo',
-                  ),
-                  style: TextStyle(
-                    color: Theme.of(context).brightness == Brightness.light
-                        ? Colors.black
-                        : Colors.white,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // con il ! diciamo a DART che questo valore non sarà mai nullo
-                    Text(
-                      _selectedDate == null
-                          ? 'Data'
-                          : formatter.format(_selectedDate!),
-                      style: TextStyle(
-                        color: Theme.of(context).brightness == Brightness.light
-                            ? Colors.black
-                            : Colors.white,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: _presentDatePicker,
-                      icon: const Icon(Icons.calendar_month),
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Row(
-            children: [
-              DropdownButton(
-                value: _selectedCategory,
-                items: Category.values
-                    .map(
-                      (category) => DropdownMenuItem(
-                        value: category,
-                        child: Text(
-                          categoryName[category]?.data ?? '',
+    final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
+
+    return LayoutBuilder(builder: (ctx, constraints) {
+      // In questo modo sappiamo esattamente quanto spazio si ha a disposizione
+      // e si può decidere quale layout si può visualizzare
+      // print(constraints.minWidth);
+      // print(constraints.maxWidth);
+      // print(constraints.minHeight);
+      // print(constraints.minHeight);
+
+      final width = constraints.maxWidth;
+
+      return SizedBox(
+        height: double.infinity,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(16, 16, 16, keyboardSpace + 16),
+            child: Column(
+              children: [
+                if (width >= 600)
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: _titleController,
+                          maxLength: 50,
+                          decoration: const InputDecoration(
+                            labelText: 'Descrizione',
+                          ),
                           style: TextStyle(
-                            color:
-                                Theme.of(context).brightness == Brightness.light
-                                    ? Colors.black
-                                    : Colors.white,
+                            color: Theme.of(context).brightness == Brightness.light
+                                ? Colors.black
+                                : Colors.white,
                           ),
                         ),
                       ),
+                      const SizedBox(
+                        width: 24,
+                      ),
+                      Expanded(
+                        child: TextField(
+                          controller: _amountController,
+                          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                          maxLength: 10,
+                          decoration: const InputDecoration(
+                            prefixText: '€',
+                            labelText: 'Importo',
+                          ),
+                          style: TextStyle(
+                            color: Theme.of(context).brightness == Brightness.light
+                                ? Colors.black
+                                : Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                else
+                  TextField(
+                    controller: _titleController,
+                    maxLength: 50,
+                    decoration: const InputDecoration(
+                      label: Text('Descrizione'),
+                    ),
+                    style: TextStyle(
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _amountController,
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true),
+                        maxLength: 10,
+                        decoration: const InputDecoration(
+                          prefixText: '€',
+                          labelText: 'Importo',
+                        ),
+                        style: TextStyle(
+                          color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? Colors.black
+                                  : Colors.white,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          // con il ! diciamo a DART che questo valore non sarà mai nullo
+                          Text(
+                            _selectedDate == null
+                                ? 'Data'
+                                : formatter.format(_selectedDate!),
+                            style: TextStyle(
+                              color: Theme.of(context).brightness ==
+                                      Brightness.light
+                                  ? Colors.black
+                                  : Colors.white,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: _presentDatePicker,
+                            icon: const Icon(Icons.calendar_month),
+                          )
+                        ],
+                      ),
                     )
-                    .toList(),
-                onChanged: (value) {
-                  if (value == null) {
-                    return;
-                  }
-                  setState(() {
-                    _selectedCategory = value;
-                  });
-                },
-                menuMaxHeight: 250.00,
-              ),
-              const Spacer(),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Chiudi'),
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              ElevatedButton(
-                onPressed: _submitExpenseDate,
-                child: const Text('Salva'),
-              ),
-            ],
+                  ],
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                Row(
+                  children: [
+                    DropdownButton(
+                      value: _selectedCategory,
+                      items: Category.values
+                          .map(
+                            (category) => DropdownMenuItem(
+                              value: category,
+                              child: Text(
+                                categoryName[category]?.data ?? '',
+                                style: TextStyle(
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.light
+                                      ? Colors.black
+                                      : Colors.white,
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (value) {
+                        if (value == null) {
+                          return;
+                        }
+                        setState(() {
+                          _selectedCategory = value;
+                        });
+                      },
+                      menuMaxHeight: 250.00,
+                    ),
+                    const Spacer(),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Chiudi'),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    ElevatedButton(
+                      onPressed: _submitExpenseDate,
+                      child: const Text('Salva'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ],
-      ),
-    );
+        ),
+      );
+    });
   }
 
   void _presentDatePicker() async {
