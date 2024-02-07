@@ -46,6 +46,7 @@ class _NewExpenseState extends State<NewExpense> {
               children: [
                 if (width >= 600)
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: TextField(
@@ -55,9 +56,10 @@ class _NewExpenseState extends State<NewExpense> {
                             labelText: 'Descrizione',
                           ),
                           style: TextStyle(
-                            color: Theme.of(context).brightness == Brightness.light
-                                ? Colors.black
-                                : Colors.white,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.black
+                                    : Colors.white,
                           ),
                         ),
                       ),
@@ -67,16 +69,18 @@ class _NewExpenseState extends State<NewExpense> {
                       Expanded(
                         child: TextField(
                           controller: _amountController,
-                          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                          keyboardType: const TextInputType.numberWithOptions(
+                              decimal: true),
                           maxLength: 10,
                           decoration: const InputDecoration(
                             prefixText: '€',
                             labelText: 'Importo',
                           ),
                           style: TextStyle(
-                            color: Theme.of(context).brightness == Brightness.light
-                                ? Colors.black
-                                : Colors.white,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.black
+                                    : Colors.white,
                           ),
                         ),
                       ),
@@ -95,102 +99,181 @@ class _NewExpenseState extends State<NewExpense> {
                           : Colors.white,
                     ),
                   ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _amountController,
-                        keyboardType: const TextInputType.numberWithOptions(
-                            decimal: true),
-                        maxLength: 10,
-                        decoration: const InputDecoration(
-                          prefixText: '€',
-                          labelText: 'Importo',
-                        ),
-                        style: TextStyle(
-                          color:
-                              Theme.of(context).brightness == Brightness.light
-                                  ? Colors.black
-                                  : Colors.white,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          // con il ! diciamo a DART che questo valore non sarà mai nullo
-                          Text(
-                            _selectedDate == null
-                                ? 'Data'
-                                : formatter.format(_selectedDate!),
-                            style: TextStyle(
-                              color: Theme.of(context).brightness ==
-                                      Brightness.light
-                                  ? Colors.black
-                                  : Colors.white,
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: _presentDatePicker,
-                            icon: const Icon(Icons.calendar_month),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Row(
-                  children: [
-                    DropdownButton(
-                      value: _selectedCategory,
-                      items: Category.values
-                          .map(
-                            (category) => DropdownMenuItem(
-                              value: category,
-                              child: Text(
-                                categoryName[category]?.data ?? '',
-                                style: TextStyle(
-                                  color: Theme.of(context).brightness ==
-                                          Brightness.light
-                                      ? Colors.black
-                                      : Colors.white,
+                if (width >= 600)
+                  Row(
+                    children: [
+                      DropdownButton(
+                        value: _selectedCategory,
+                        items: Category.values
+                            .map(
+                              (category) => DropdownMenuItem(
+                                value: category,
+                                child: Text(
+                                  categoryName[category]?.data ?? '',
+                                  style: TextStyle(
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.light
+                                        ? Colors.black
+                                        : Colors.white,
+                                  ),
                                 ),
                               ),
+                            )
+                            .toList(),
+                        onChanged: (value) {
+                          if (value == null) {
+                            return;
+                          }
+                          setState(() {
+                            _selectedCategory = value;
+                          });
+                        },
+                        menuMaxHeight: 250.00,
+                      ),
+                      const SizedBox(
+                        width: 24,
+                      ),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            // con il ! diciamo a DART che questo valore non sarà mai nullo
+                            Text(
+                              _selectedDate == null
+                                  ? 'Data'
+                                  : formatter.format(_selectedDate!),
+                              style: TextStyle(
+                                color: Theme.of(context).brightness ==
+                                        Brightness.light
+                                    ? Colors.black
+                                    : Colors.white,
+                              ),
                             ),
-                          )
-                          .toList(),
-                      onChanged: (value) {
-                        if (value == null) {
-                          return;
-                        }
-                        setState(() {
-                          _selectedCategory = value;
-                        });
-                      },
-                      menuMaxHeight: 250.00,
-                    ),
-                    const Spacer(),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Chiudi'),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    ElevatedButton(
-                      onPressed: _submitExpenseDate,
-                      child: const Text('Salva'),
-                    ),
-                  ],
-                ),
+                            IconButton(
+                              onPressed: _presentDatePicker,
+                              icon: const Icon(Icons.calendar_month),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  )
+                else
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: _amountController,
+                          keyboardType: const TextInputType.numberWithOptions(
+                              decimal: true),
+                          maxLength: 10,
+                          decoration: const InputDecoration(
+                            prefixText: '€',
+                            labelText: 'Importo',
+                          ),
+                          style: TextStyle(
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.black
+                                    : Colors.white,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            // con il ! diciamo a DART che questo valore non sarà mai nullo
+                            Text(
+                              _selectedDate == null
+                                  ? 'Data'
+                                  : formatter.format(_selectedDate!),
+                              style: TextStyle(
+                                color: Theme.of(context).brightness ==
+                                        Brightness.light
+                                    ? Colors.black
+                                    : Colors.white,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: _presentDatePicker,
+                              icon: const Icon(Icons.calendar_month),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                const SizedBox(height: 16),
+                if (width >= 600)
+                  Row(
+                    children: [
+                      const Spacer(),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Chiudi'),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      ElevatedButton(
+                        onPressed: _submitExpenseDate,
+                        child: const Text('Salva'),
+                      ),
+                    ],
+                  )
+                else
+                  Row(
+                    children: [
+                      DropdownButton(
+                        value: _selectedCategory,
+                        items: Category.values
+                            .map(
+                              (category) => DropdownMenuItem(
+                                value: category,
+                                child: Text(
+                                  categoryName[category]?.data ?? '',
+                                  style: TextStyle(
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.light
+                                        ? Colors.black
+                                        : Colors.white,
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (value) {
+                          if (value == null) {
+                            return;
+                          }
+                          setState(() {
+                            _selectedCategory = value;
+                          });
+                        },
+                        menuMaxHeight: 250.00,
+                      ),
+                      const Spacer(),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Chiudi'),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      ElevatedButton(
+                        onPressed: _submitExpenseDate,
+                        child: const Text('Salva'),
+                      ),
+                    ],
+                  ),
               ],
             ),
           ),
